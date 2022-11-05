@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <body>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+
+  <div class="main">
+    <label for="Df"> <!-- Date from -->
+      <b>Date from</b>
+    <input id="Df" type="text" placeholder="Date from" name="Df" required>
+    </label>
+
+    <label for="Dt"> <!-- Date to -->
+      <b>Date to</b>
+    <input id="Dt" type="text" placeholder="Date to" name="Dt" required>
+    </label>
+
+    <label for="Pc"> <!-- Product code -->
+      <b>Product code</b>
+    <input id="Pc" type="text" placeholder="Enter Product code" name="Pc" required>
+    </label>
+
+    <label for="P"> <!-- Price -->
+      <b>Price</b>
+    <input id="P" type="text" placeholder="Enter Price" name="P" required>
+    </label>
+
+    <label for="Sa"> <!-- Stock amount -->
+      <b>Stock amount</b>
+    <input id="Sa" type="text" placeholder="Enter Stock amount" name="Sa" required>
+    </label>
+    <button type="submit">Submit</button>
+  </div>
+</body>
+</html>
