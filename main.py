@@ -6,22 +6,29 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template('login.html')
+    return render_template('login.html', login_fail=False)
+
 
 @app.route("/data.html")
 def data():
     return render_template('data.html')
 
-@app.route("/supplier_login", methods=['POST'])
+
+@app.route("/supplier_login", methods=['POST', 'GET'])
 def supplier_login():
+    login_fail = False
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if username == "1":
-            cursor.execute("SELECT * FROM mytest")
-            return f"{cursor.fetchall()}"
+        login_sql = f"SELECT count(username) FROM Supplier_Login WHERE username = '{username}' AND password = '{password}'"
+        cursor.execute(login_sql)
+        result = cursor.fetchone()
+        if str(result['count(username)']) == "1":
+            return render_template('data.html')
         else:
-            return "Invalid Login"
+            return render_template('login.html', login_fail=True)
+    else:
+        return "Invalid Login"
 
 
 @app.route('/success/<name>')
@@ -30,7 +37,7 @@ def success(name):
 
 
 if __name__ == "__main__":
-    timeout = 10
+    timeout = 30
     connection = pymysql.connect(
         charset="utf8mb4",
         connect_timeout=timeout,
